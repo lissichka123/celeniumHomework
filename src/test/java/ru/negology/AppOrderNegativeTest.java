@@ -39,22 +39,22 @@ public class AppOrderNegativeTest {
     public void shouldBeFailedIncorrectNameInput() {
         driver.findElement(By.xpath("//span[@data-test-id='name']//input")).sendKeys("Ivan");
         driver.findElement(By.xpath("//span[@data-test-id='phone']//input")).sendKeys("+79812346574");
-        driver.findElement(By.xpath("//span[@data-test-id='agreement']")).click();
-        driver.findElement(By.xpath("//button[contains(@class,.'button')]")).click();
+        driver.findElement(By.xpath("//label[@data-test-id='agreement']")).click();
+        driver.findElement(By.xpath("//button[contains(@class,'button')]")).click();
         assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.",
-                driver.findElement(By.xpath("//span[@data-test-id=name][contains(@class,'input_invalid')]//span[@class='input__sub']"))
+                driver.findElement(By.xpath("//span[@data-test-id='name'][contains(@class,'input_invalid')]//span[@class='input__sub']"))
                         .getText().trim());
 
     }
 
     @Test
     public void shouldBeFailedEmptyNameInput() {
-        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79812346574");
-        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79812346574");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.cssSelector("button.button")).click();
         assertEquals("Поле обязательно для заполнения",
                 driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).getText().trim());
-        assertTrue(driver.findElement(By.cssSelector("[data-test-id=name].input__sub")).isDisplayed());
+        assertTrue(driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub")).isDisplayed());
     }
 
     @Test
